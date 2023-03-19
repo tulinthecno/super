@@ -39,7 +39,8 @@
     "react-toastify": "^9.1.1",
     "sass": "^1.56.1",
     "sharp": "^0.31.3",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "slugify": "^1.6.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

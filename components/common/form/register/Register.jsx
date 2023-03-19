@@ -8,7 +8,7 @@ const Register = () => {
       <h3>Create a Free Superio Account</h3>
 
       <Tabs>
-        <div className="form-group register-dual">
+        {/* <div className="form-group register-dual">
           <TabList className="btn-box row">
             <Tab className="col-lg-6 col-md-12">
               <button className="theme-btn btn-style-four">
@@ -22,12 +22,12 @@ const Register = () => {
               </button>
             </Tab>
           </TabList>
-        </div>
+        </div> */}
         {/* End .form-group */}
 
-        <TabPanel>
+        {/* <TabPanel>
           <Form />
-        </TabPanel>
+        </TabPanel> */}
         {/* End cadidates Form */}
 
         <TabPanel>
@@ -37,12 +37,12 @@ const Register = () => {
       </Tabs>
       {/* End form-group */}
 
-      <div className="bottom-box">
+      {/* <div className="bottom-box">
         <div className="divider">
           <span>or</span>
         </div>
         <LoginWithSocial />
-      </div>
+      </div> */}
       {/* End bottom-box LoginWithSocial */}
     </div>
   );

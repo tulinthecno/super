@@ -4,10 +4,12 @@ import "../styles/index.scss";
 import '../styles/global.css'
 import { useEffect } from "react";
 import ScrollToTop from "../components/common/ScrollTop";
+import Alert from "../components/common/Alert";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { StateContextProvider } from "../context/index";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -25,8 +27,11 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+       <StateContextProvider>
       <div className="page-wrapper">
         <Component {...pageProps} />
+
+        <Alert/>
 
         {/* Toastify */}
         <ToastContainer
@@ -44,6 +49,7 @@ function MyApp({ Component, pageProps }) {
         {/* <!-- Scroll To Top --> */}
         <ScrollToTop />
       </div>
+      </StateContextProvider>
     </Provider>
   );
 }

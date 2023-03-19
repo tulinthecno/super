@@ -5,10 +5,10 @@ import DashboardEmployerSidebar from "../../../header/adminDashboardSideBar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 // import PostJobSteps from "./components/PostJobSteps";
-import PostBoxForm from "./components/PostBoxForm";
+
 import MenuToggler from "../../MenuToggler";
 
-const index = () => {
+const AdminLayout = ({title, children}) => {
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
@@ -29,7 +29,7 @@ const index = () => {
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Post a New Job!" />
+          <BreadCrumb title={title} />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -37,21 +37,31 @@ const index = () => {
 
           <div className="row">
             <div className="col-lg-12">
-              {/* <!-- Ls widget --> */}
+              {/* <!-- Ls widget -->  Children */}
               <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">
-                    <h4>Post Job</h4>
+                    <h4>{title}</h4>
                   </div>
 
                   <div className="widget-content">
                     {/* <PostJobSteps /> */}
                     {/* End job steps form */}
-                    <PostBoxForm />
+
+{children}
+
+                    {/* <PostBoxForm /> */}
                     {/* End post box form */}
                   </div>
                 </div>
               </div>
+
+
+
+
+
+
+
             </div>
           </div>
           {/* End .row */}
@@ -67,4 +77,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default AdminLayout;

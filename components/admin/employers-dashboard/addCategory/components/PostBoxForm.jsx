@@ -3,7 +3,11 @@ import Select from "react-select";
 import ImageUploader from "./imageUploader";
 import {useState, useEffect , useContext} from 'react'
 import { StateContext } from "../../../../../context/index";
-const PostBoxForm = () => {
+const PostBoxForm = (
+
+{name, setName, setImage, image , setAlert , loading, setLoading , handleClick , actionType }
+
+) => {
   const specialisms = [
     { value: "Banking", label: "Banking" },
     { value: "Digital & Creative", label: "Digital & Creative" },
@@ -15,10 +19,10 @@ const PostBoxForm = () => {
     { value: "Creative Art", label: "Creative Art" },
   ];
 
-  const { setAlert, user, pageLoading = true } = useContext(StateContext)
-const [image,setImage] =useState({name:'' , url:''})
-const [name,setName] = useState('')
-const [loading,setLoading] = useState(false)
+//   const { setAlert, user, pageLoading = true } = useContext(StateContext)
+// const [image,setImage] =useState({name:'' , url:''})
+// const [name,setName] = useState('')
+// const [loading,setLoading] = useState(false)
 
   return (
     <form className="default-form">
@@ -46,7 +50,12 @@ const [loading,setLoading] = useState(false)
 
         <div className="form-group col-lg-12 col-md-12">
           <label>Category Name</label>
-          <input type="text" name="category name" placeholder="cat_name" />
+          <input
+          
+          value={name}
+
+          onChange={e => setName(e.target.value)}
+          type="text" name="category name" placeholder="cat_name" />
         </div>
 
         {/* <!-- About Company --> */}
@@ -97,7 +106,10 @@ const [loading,setLoading] = useState(false)
   
 
         <div className="form-group col-lg-12 col-md-12 text-right">
-          <button className="theme-btn btn-style-one">Create</button>
+          <button
+       onClick={handleClick}
+          
+          className="theme-btn btn-style-one">{actionType}</button>
         </div>
       </div>
     </form>

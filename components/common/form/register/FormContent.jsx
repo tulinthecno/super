@@ -31,7 +31,7 @@ const FormContent = () => {
   }
 
 
-console.log('userInfo', userInfo?.role)
+
 
 
 
@@ -41,7 +41,7 @@ console.log('userInfo', userInfo?.role)
     onSubmit={e => onSubmit(e)}
     
     >
-      {userInfo?.email}
+      
 {loading && <Loader />}
 
 <div className="form-group">

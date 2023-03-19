@@ -1,22 +1,73 @@
 import Link from "next/link";
-import LoginWithSocial from "./LoginWithSocial";
+import Loader from '../../../common/Loader'
+import { StateContext } from '../../../../context/index'
+
+import { useRouter } from 'next/router'
+import React, { useContext, useState } from 'react'
+
+
 
 const FormContent = () => {
+
+  const [name,setName] = useState('')
+        const [email, setEmail] = useState("")
+        const [password, setPassword] = useState("")
+        const [loading, setLoading] = useState(false)
+        const { signInUser , user } = useContext(StateContext)
+        const { replace } = useRouter()
+        const onSubmit = async e => {
+            e.preventDefault()
+            setLoading(true)
+            await signInUser(email, password , name )
+
+
+            // if( name === 'admin' ) {
+            // replace('/admin')
+            // }
+
+            // else {
+            //     replace('/')
+            // }
+            setLoading(false)
+        }
+    
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="form-inner">
+      {loading && <Loader />}
       <h3>Login to Superio</h3>
 
       {/* <!--Login Form--> */}
-      <form method="post">
+      <form
+       onSubmit={e => onSubmit(e)}
+      method="post">
         <div className="form-group">
           <label>Username</label>
-          <input type="text" name="username" placeholder="Username" required />
+          <input
+                onChange={e => setEmail(e.target.value)}
+                value={email}
+          
+          type="email" name="email" placeholder="email" required />
         </div>
         {/* name */}
 
         <div className="form-group">
           <label>Password</label>
-          <input type="password" name="password" placeholder="Password" />
+          <input
+            onChange={e => setPassword(e.target.value)}
+            value={password}
+          
+          type="password" name="password" placeholder="Password" />
         </div>
         {/* password */}
 
@@ -62,11 +113,14 @@ const FormContent = () => {
           </Link>
         </div>
 
-        <div className="divider">
+        {/* <div className="divider">
           <span>or</span>
         </div>
 
-        <LoginWithSocial />
+        <LoginWithSocial /> */}
+
+
+
       </div>
       {/* End bottom-box LoginWithSocial */}
     </div>

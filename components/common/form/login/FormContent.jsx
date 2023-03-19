@@ -13,7 +13,7 @@ const FormContent = () => {
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
         const [loading, setLoading] = useState(false)
-        const { signInUser , user } = useContext(StateContext)
+        const { signInUser , user , userInfo } = useContext(StateContext)
         const { replace } = useRouter()
         const onSubmit = async e => {
             e.preventDefault()
@@ -21,13 +21,13 @@ const FormContent = () => {
             await signInUser(email, password , name )
 
 
-            // if( name === 'admin' ) {
-            // replace('/admin')
-            // }
+            if( userInfo?.role === 'admin' ) {
+            replace('/admin')
+            }
 
-            // else {
-            //     replace('/')
-            // }
+            else {
+                replace('/')
+            }
             setLoading(false)
         }
     

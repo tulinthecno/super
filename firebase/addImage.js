@@ -1,9 +1,9 @@
 import { storage } from './index'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
-const uploadFile = (file, filePath , update= false) => {
+const uploadFile = (file, filePath ,collectionName, update= false ) => {
   return new Promise( async (resolve, reject) => {
-    const storageRef = ref(storage, `cats/${filePath}`)
+    const storageRef = ref(storage, `${collectionName}/${filePath}`)
 
 if(update){
   

@@ -7,6 +7,7 @@ import {useState, useEffect , useContext} from 'react'
 import { StateContext } from "../../../../context/index";
 import getBlogCount from '../../../../firebase/getBlogCount'
 import { db } from "../../../../firebase/index";
+import Loader from "../../../common/Loader";
 
 import { addDoc, collection } from "firebase/firestore";
 import moment from "moment/moment";
@@ -62,7 +63,7 @@ const handleClick = async (e) => {
   return (
     <AdminLayout title='Add new Category'>
 
-
+{loading && <Loader/>}
 <div>
   <PostBoxForm  
   

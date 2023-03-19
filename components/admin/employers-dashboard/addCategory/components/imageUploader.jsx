@@ -25,7 +25,7 @@ try {
 
 
 
-    const url = await uploadFile(file, filePath)
+    const url = await uploadFile(file, filePath , 'category')
     setImage({ url, name: filePath })
     // setImage(url)
 } catch (error) {
@@ -50,7 +50,7 @@ setLoading(false)
     const deleteImage = async() => {
         setLoading(true)
 
-      await  handleDelete(image)
+      await  handleDelete(image , 'category')
 
         setImage({ url: '', name: '' })
         setLogoImg('')

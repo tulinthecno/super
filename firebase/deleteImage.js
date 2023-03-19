@@ -2,7 +2,7 @@ import { storage } from './index'
 import { getDownloadURL, ref, uploadBytes, deleteObject } from 'firebase/storage'
 import { toast } from 'react-toastify'
 
-export const handleDelete = async (image) => {
+export const handleDelete = async (image , collectionName) => {
   try {
 
 
@@ -14,9 +14,9 @@ export const handleDelete = async (image) => {
 
     console.log('image is Name:🔷️🔶️🔷️🔶️ ' + image)
 
-    const desertRef = ref(storage, `products/${image?.name}`);
+    const desertRef = ref(storage, `${collectionName}/${image?.name}`);
     await deleteObject(desertRef);
-    toast.success('Blog images Deleted  successfully')
+    toast.success(`${collectionName} images Deleted  successfully`)
 
 
 

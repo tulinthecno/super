@@ -156,24 +156,38 @@ console.log('email: ' + email)
     };
   }, []);
 
-  const handleDelete = async (blog) => {
+  const handleDelete = async (collectionName,docData) => {
     try {
       setLoading(true);
 
-      console.log("blog object CLICKEDDDDD", blog);
+      console.log("blog object CLICKEDDDDD", docData);
 
-      await deleteDoc(doc(db, "blog", blog.id));
+      await deleteDoc(doc(db, collectionName, docData.id));
 
-      blog.image.forEach(async (img) => {
+
+if (collectionName === 'products'){
+
+      docData.image.forEach(async (img) => {
         console.log("image is Name:🔷️🔶️🔷️🔶️ " + img);
 
         const desertRef = ref(storage, `images/${img?.name}`);
         await deleteObject(desertRef);
-        toast.success("Blog images Deleted  successfully");
+        toast.success(`${collectionName} images Deleted  successfully`);
       });
+    }
+    else {
+
+      const desertRef = ref(storage, `${collectionName}/${docData?.image?.name}`);
+      await deleteObject(desertRef);
+      toast.success(`${collectionName} image Deleted  successfully`);
+
+
+    }
+
+
 
       console.log("Document successfully deleted!");
-      toast.success("Blog deleted successfully");
+      toast.success(`${collectionName} deleted successfully`);
       window.location.reload();
     } catch (error) {
       console.error("Error removing document: ", error);
@@ -211,7 +225,9 @@ console.log('email: ' + email)
         logout,
         handleDelete,
         signUpUser,
-        userInfo
+        userInfo ,
+        Loading,
+        setLoading,
       }}
     >
       {children}

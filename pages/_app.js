@@ -2,20 +2,26 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import "../styles/index.scss";
 import '../styles/global.css'
-import { useEffect } from "react";
+import { useEffect ,useContext } from "react";
 import ScrollToTop from "../components/common/ScrollTop";
 import Alert from "../components/common/Alert";
+import Loader from "../components/common/Loader";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { StateContextProvider } from "../context/index";
 
+
+
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }
 
 function MyApp({ Component, pageProps }) {
+
+ 
+
   // aos animation activation
 
   useEffect(() => {
@@ -30,6 +36,9 @@ function MyApp({ Component, pageProps }) {
        <StateContextProvider>
       <div className="page-wrapper">
         <Component {...pageProps} />
+
+{/* {Loading && <Loader/>} */}
+
 
         <Alert/>
 

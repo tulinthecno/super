@@ -197,6 +197,14 @@ if (collectionName === 'products'){
     }
   };
 
+
+
+
+
+
+
+
+
   //   const UseDeleteImg = async (photos) => {
 
   //     try {
@@ -228,6 +236,7 @@ if (collectionName === 'products'){
         userInfo ,
         Loading,
         setLoading,
+        
       }}
     >
       {children}

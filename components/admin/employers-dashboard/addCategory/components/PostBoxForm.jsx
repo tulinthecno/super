@@ -5,7 +5,7 @@ import {useState, useEffect , useContext} from 'react'
 import { StateContext } from "../../../../../context/index";
 const PostBoxForm = (
 
-{name, setName, setImage, image , setAlert , loading, setLoading , handleClick , actionType }
+{name, setName, setImage, image , setAlert , loading, setLoading , handleClick , actionType , cats=[] , fromSubAdd ,handleSelectCategory , collectionName , category , fromProduct }
 
 ) => {
   const specialisms = [
@@ -41,6 +41,7 @@ const PostBoxForm = (
           name={name}  setName={setName}
           loading={loading}  setLoading={setLoading}
           setAlert={setAlert}
+          collectionName={collectionName}
           
           />
         </div>
@@ -49,7 +50,11 @@ const PostBoxForm = (
 
 
         <div className="form-group col-lg-12 col-md-12">
-          <label>Category Name</label>
+          <label>
+
+{fromSubAdd ? "subCategory Name" :fromProduct ? "product Name" : "Category Name" }
+
+          </label>
           <input
           
           value={name}
@@ -57,6 +62,42 @@ const PostBoxForm = (
           onChange={e => setName(e.target.value)}
           type="text" name="category name" placeholder="cat_name" />
         </div>
+
+{/* -----SubCategory  Select Category---- */}
+{ fromSubAdd &&
+<div className="form-group col-lg-6 col-md-12">
+          <label>Select Category</label>
+          <select
+          
+          onChange={handleSelectCategory }
+          
+          className="chosen-single form-select">
+            <option
+            selected={category}
+            value={category}
+            >Selected</option>
+           {cats?.length > 0  ? 
+           
+           cats?.map((cat) =>{
+
+return <option value={cat?.id} key={cat?.id}>{cat?.name}</option>
+
+
+           })
+           
+           
+           : <option value="" key="">No Data</option>}
+          </select>
+        </div> 
+}
+
+
+
+
+
+
+
+
 
         {/* <!-- About Company --> */}
         {/* <div className="form-group col-lg-12 col-md-12">

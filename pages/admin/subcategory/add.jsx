@@ -2,20 +2,15 @@ import dynamic from "next/dynamic";
 import Seo from "../../../components/common/Seo";
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore"; 
-import { useContext } from "react";
-import { CollectionData } from '../../../context/functions'
-
-import AllCategoriesMain from "../../../components/admin/employers-dashboard/allCategory/index";
-
-const CATSPAGE = ({data}) => {
-
- 
 
 
+import AddSubCatMain from "../../../components/admin/employers-dashboard/subCategory/AddSubCat";
+
+const AddSubCatNew = ({cats}) => {
   return (
     <>
-      <Seo pageTitle="All Categories" />
-      <AllCategoriesMain data={data}/>
+      <Seo pageTitle="Add New subCategory" />
+      <AddSubCatMain cats={cats}  />
     </>
   );
 };
@@ -23,12 +18,11 @@ const CATSPAGE = ({data}) => {
 
 
 
-export default  CATSPAGE;
+export default  AddSubCatNew;
 
 
 
-
-CATSPAGE.getInitialProps = async (context  ) => {
+AddSubCatNew.getInitialProps = async (context  ) => {
   
     
   const data = [];
@@ -49,20 +43,18 @@ CATSPAGE.getInitialProps = async (context  ) => {
     console.error(error);
   }
 
-  
  
 
 
-// console.log('All Categories' + data)
+console.log('All Categories' + data)
 
 
   return {
-    data,
+    cats:data,
+    
   };
 };
 
 
 
 
-
-//dynamic(() => Promise.resolve(index), { ssr: false });

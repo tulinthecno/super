@@ -24,6 +24,7 @@ export default function UpdateCategoryMain() {
     const [index, setIndex] = useState()
     const [loading,setLoading] = useState(false)
     const   actionType='Update'
+    const collectionName ='category'
     const { replace, query } = useRouter();
 
     const {id}  = query
@@ -129,6 +130,7 @@ export default function UpdateCategoryMain() {
             setLoading,
             image,
          
+            collectionName,
             actionType,        
             id,
           

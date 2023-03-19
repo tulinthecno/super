@@ -4,7 +4,7 @@ import { handleDelete } from '../../../../../firebase/deleteImage'
 import Loader from "../../../../common/Loader"
 
 
-const ImageUploader = ({image, setImage , setLoading , loading ,setAlert }) => {
+const ImageUploader = ({image, setImage , setLoading , loading ,setAlert , collectionName }) => {
     const [logoImg, setLogoImg] = useState("");
     const [converImg, setCoverImg] = useState("");
 
@@ -25,7 +25,7 @@ try {
 
 
 
-    const url = await uploadFile(file, filePath , 'category')
+    const url = await uploadFile(file, filePath , collectionName)
     setImage({ url, name: filePath })
     // setImage(url)
 } catch (error) {
@@ -50,7 +50,7 @@ setLoading(false)
     const deleteImage = async() => {
         setLoading(true)
 
-      await  handleDelete(image , 'category')
+      await  handleDelete(image , collectionName)
 
         setImage({ url: '', name: '' })
         setLogoImg('')

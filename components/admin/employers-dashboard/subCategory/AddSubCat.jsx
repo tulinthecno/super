@@ -1,8 +1,6 @@
-
-
-import PostBoxForm from "./components/PostBoxForm";
-
-import AdminLayout from "../AdminLayout";
+import React from 'react'
+import AdminLayout from '../AdminLayout'
+import PostBoxForm from '../addCategory/components/PostBoxForm'
 import {useState, useEffect , useContext} from 'react'
 import { StateContext } from "../../../../context/index";
 import getBlogCount from '../../../../firebase/getBlogCount'
@@ -12,23 +10,14 @@ import Loader from "../../../common/Loader";
 import { addDoc, collection } from "firebase/firestore";
 import moment from "moment/moment";
 
+export default function AddSubCat({cats}) {
 
-//      <PostBoxForm />
-
-
-
-
-
-
-
-export default function AddCategoryMain() {
-
-
-  const { setAlert, user, pageLoading = true } = useContext(StateContext)
+  const { setAlert,Loading,setLoading, user, pageLoading = true } = useContext(StateContext)
 const [image,setImage] =useState({name:'' , url:''})
 const [name,setName] = useState('')
-const [loading,setLoading] = useState(false)
-
+const [category ,setCategory]  = useState('')
+// const [loading,setLoading] = useState(false)
+const actionType ='Create SubCategory'
 
 const handleClick = async (e) => {
   e.preventDefault();
@@ -38,12 +27,13 @@ const handleClick = async (e) => {
     const data = {
       name,
       image,
+      category,
     
-      index: await getBlogCount('category') + 1,
+      index: await getBlogCount('subcategory') + 1,
       date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss") ,
    
     }
-    await addDoc(collection(db, 'category'), data)
+    await addDoc(collection(db, 'subcategory'), data)
     setName("")
     setImage({url:'' , name:''})
     
@@ -56,31 +46,45 @@ const handleClick = async (e) => {
 }
 
 
+const handleSelectCategory=(e)=>{
+  setCategory(e.target.value)
+}
+
 
 
 
 
   return (
-    <AdminLayout title='Add new Category'>
+        
+<AdminLayout title='Add SubCategory'>
 
-{loading && <Loader/>}
+{category}
+
+{Loading && <Loader/>}
 <div>
   <PostBoxForm  
   
   image={image}   setImage={setImage}
-  actionType='Create'
+  actionType='Create SubCategory'
           name={name}  setName={setName}
-          loading={loading}  setLoading={setLoading}
+          loading={Loading}  setLoading={setLoading}
           setAlert={setAlert}
           handleClick ={handleClick }
-          collectionName = 'category'
+          collectionName ='subcategory'
+          cats={cats}
+          fromSubAdd ={true}
+          handleSelectCategory={handleSelectCategory}
+          // category={category}
+          // setCategory={setCategory}
   
   />
 </div>
 
 
-    </AdminLayout>
+
+
+
+
+</AdminLayout>
   )
 }
-
-

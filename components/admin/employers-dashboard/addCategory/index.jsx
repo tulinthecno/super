@@ -20,7 +20,7 @@ import moment from "moment/moment";
 
 
 
-export default function index() {
+export default function AddCategoryMain() {
 
 
   const { setAlert, user, pageLoading = true } = useContext(StateContext)

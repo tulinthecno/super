@@ -5,11 +5,11 @@ import { collection, getDocs } from "firebase/firestore";
 
 import AllCategoriesMain from "../../../components/admin/employers-dashboard/allCategory/index";
 
-const CATSPAGE = () => {
+const CATSPAGE = ({data}) => {
   return (
     <>
       <Seo pageTitle="All Categories" />
-      <AllCategoriesMain/>
+      <AllCategoriesMain cats={data}/>
     </>
   );
 };

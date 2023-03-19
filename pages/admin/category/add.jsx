@@ -1,12 +1,12 @@
 import dynamic from "next/dynamic";
 import Seo from "../../../components/common/Seo";
-import PostJob from "../../../components/admin/employers-dashboard/addCategory/index";
+import AddCategoryMain from "../../../components/admin/employers-dashboard/addCategory/index";
 
 const index = () => {
   return (
     <>
-      <Seo pageTitle="Post Jobs" />
-      <PostJob />
+      <Seo pageTitle="Add Category Page" />
+      <AddCategoryMain />
     </>
   );
 };

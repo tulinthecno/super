@@ -52,7 +52,7 @@ const PostBoxForm = (
 
 return (
 
-<div>
+<div key={index}>
 <img className=" w-24 h-24  rounded-2xl" src={image?.url} alt="" />
 </div>
 

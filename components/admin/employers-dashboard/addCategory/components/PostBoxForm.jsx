@@ -7,7 +7,7 @@ import { StateContext } from "../../../../../context/index";
 import ArrayImageUploader from "./ArrayImageUploader";
 const PostBoxForm = (
 
-{name, setName, setImage, image , setAlert , loading, setLoading , handleClick , actionType , cats=[] , fromSubAdd ,handleSelectCategory , collectionName , category , fromProduct   , price ,setPrice ,quantity ,setQuantity ,colors ,setColors ,    handleSeleSubctCategory ,subCats ,desc , handleDesc , showcats ,showsubcats ,images ,setImages }
+{name, setName, setImage, image , setAlert , loading, setLoading , handleClick , actionType , cats=[] , fromSubAdd ,handleSelectCategory , collectionName , category , fromProduct   , price ,setPrice ,quantity ,setQuantity ,colors ,setColors ,    handleSeleSubctCategory ,subCats ,desc , handleDesc , showcats ,showsubcats ,images ,setImages  ,  fromUpdateProduct=false,imagesData  ,  arrayImagesUploader=false ,  subCategory }
 
 ) => {
 
@@ -43,7 +43,30 @@ const PostBoxForm = (
 
         <div className="form-group col-lg-12 col-md-12">
           {/* // for single image Uplaoder  */}
-       {fromProduct  ?   <ArrayImageUploader images={images} setAlert={setAlert}  setImages={setImages} loading={loading} setLoading={setLoading}/> :  <ImageUploader  image={image}   setImage={setImage}
+       { arrayImagesUploader  ?   <ArrayImageUploader images={images} setAlert={setAlert}  setImages={setImages} loading={loading} setLoading={setLoading}/> : fromUpdateProduct ? <div>
+
+
+<div className=" flex  gap-3 flex-wrap">
+
+{imagesData.map((image ,index)=>{
+
+return (
+
+<div>
+<img className=" w-24 h-24  rounded-2xl" src={image?.url} alt="" />
+</div>
+
+)
+
+})}
+
+
+</div>
+
+
+
+
+       </div>  :  <ImageUploader  image={image}   setImage={setImage}
           
 
   
@@ -82,12 +105,11 @@ const PostBoxForm = (
           <select
           
           onChange={handleSelectCategory }
-          
+          value={category}
           className="chosen-single form-select">
-            <option
-            selected={category}
-            value={category}
-            >Selected</option>
+          
+
+
            {cats?.length > 0  ? 
            
            cats?.map((cat) =>{
@@ -123,13 +145,13 @@ return <option value={cat?.id} key={cat?.id}>{cat?.name}</option>
 <div className="form-group col-lg-6 col-md-12">
           <label>Select subCategory</label>
           <select
-          
+            selected={subCategory}
           onChange={handleSeleSubctCategory}
           
           className="chosen-single form-select">
             <option
-            selected={category}
-            value={category}
+          
+           
             >Selected</option>
            {cats?.length > 0  ? 
            
@@ -179,7 +201,7 @@ return <option value={cat?.id} key={cat?.id}>{cat?.name}</option>
           <label>Specialisms </label>
           <Select
            menuPlacement="bottom"
-           
+           value={colors}
            components={animatedComponents}
             defaultValue={[specialisms[2]]}
             isMulti
@@ -201,6 +223,55 @@ return <option value={cat?.id} key={cat?.id}>{cat?.name}</option>
         </div>
 
 }
+
+
+
+
+{ fromProduct    &&
+
+<div className="form-group col-lg-6 col-md-12">
+          <label>Price </label>
+
+
+<input
+ onChange={e => setPrice(e.target.value)}
+
+
+type="number"  value={price} />
+
+
+
+
+
+          </div>
+
+}
+
+
+
+{ fromProduct    &&
+
+<div className="form-group col-lg-6 col-md-12">
+          <label>Quantity </label>
+
+
+<input
+value={quantity}
+ onChange={e => setQuantity(e.target.value)}
+
+
+type="number"  />
+
+
+
+
+
+          </div>
+
+}
+
+
+
 
 
 

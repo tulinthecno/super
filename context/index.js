@@ -160,17 +160,17 @@ console.log('email: ' + email)
     try {
       setLoading(true);
 
-      console.log("blog object CLICKEDDDDD", docData);
+      console.log("??? object CLICKEDDDDD", docData?.id  , 'collectionName', collectionName);
 
-      await deleteDoc(doc(db, collectionName, docData.id));
+      await deleteDoc(doc(db,collectionName ,docData.id));
 
 
-if (collectionName === 'products'){
+if (collectionName === 'product'){
 
-      docData.image.forEach(async (img) => {
+      docData.images.forEach(async (img) => {
         console.log("image is Name:🔷️🔶️🔷️🔶️ " + img);
 
-        const desertRef = ref(storage, `images/${img?.name}`);
+        const desertRef = ref(storage, `product/${img?.name}`);
         await deleteObject(desertRef);
         toast.success(`${collectionName} images Deleted  successfully`);
       });

@@ -139,6 +139,7 @@ export default function UpdateSubCat({cats}) {
                  collectionName ='subcategory'
                  category
                  cats={cats}
+                 showcats={true}
                  fromSubAdd ={true}
                  handleSelectCategory={handleSelectCategory}
         />

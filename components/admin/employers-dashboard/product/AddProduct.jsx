@@ -65,6 +65,7 @@ const handleClick = async (e) => {
       quantity,
       price,
       desc ,
+      subCategory,
 
     
       index: await getBlogCount('product') + 1,
@@ -135,13 +136,13 @@ useEffect(() => {
 {/* {category} */}
 
 {Loading && <Loader/>}
-
-{colors[1]?.value}
+qqqq
+{quantity}
 
 
 <div>
   <PostBoxForm  
-  
+  arrayImagesUploader ={true}
   images={images}   setImages={setImages}
   actionType='Create Product'
           name={name}  setName={setName}
@@ -163,6 +164,7 @@ useEffect(() => {
           handleSeleSubctCategory={handleSeleSubctCategory}
           showcats={true}
           showsubcats={true}
+          subCategory={ subCategory}
           // category={category}
           // setCategory={setCategory}
   

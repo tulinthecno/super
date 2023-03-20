@@ -76,6 +76,7 @@ const handleSelectCategory=(e)=>{
           handleSelectCategory={handleSelectCategory}
           showcats={true}
           showsubcats={false}
+          category={category}
           // category={category}
           // setCategory={setCategory}
   

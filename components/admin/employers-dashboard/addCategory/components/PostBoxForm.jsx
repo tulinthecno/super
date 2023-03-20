@@ -1,22 +1,28 @@
 import Map from "../../../Map";
 import Select from "react-select";
+import makeAnimated from 'react-select/animated';
 import ImageUploader from "./imageUploader";
 import {useState, useEffect , useContext} from 'react'
 import { StateContext } from "../../../../../context/index";
+import ArrayImageUploader from "./ArrayImageUploader";
 const PostBoxForm = (
 
-{name, setName, setImage, image , setAlert , loading, setLoading , handleClick , actionType , cats=[] , fromSubAdd ,handleSelectCategory , collectionName , category , fromProduct }
+{name, setName, setImage, image , setAlert , loading, setLoading , handleClick , actionType , cats=[] , fromSubAdd ,handleSelectCategory , collectionName , category , fromProduct   , price ,setPrice ,quantity ,setQuantity ,colors ,setColors ,    handleSeleSubctCategory ,subCats ,desc , handleDesc , showcats ,showsubcats ,images ,setImages }
 
 ) => {
+
+  const animatedComponents = makeAnimated();
+
+
   const specialisms = [
-    { value: "Banking", label: "Banking" },
-    { value: "Digital & Creative", label: "Digital & Creative" },
-    { value: "Retail", label: "Retail" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Managemnet", label: "Managemnet" },
-    { value: "Accounting & Finance", label: "Accounting & Finance" },
-    { value: "Digital", label: "Digital" },
-    { value: "Creative Art", label: "Creative Art" },
+    { value: "bg-red-500", label: "Red" },
+    { value: "bg-blue-500", label: "Blue" },
+    { value: "bg-black", label: "Black" },
+    { value: "bg-green-400", label: "Green" },
+    { value: "bg-white", label: "White" },
+    { value: "bg-grey-400", label: "Grey" },
+    // { value: "Digital", label: "Digital" },
+    // { value: "Creative Art", label: "Creative Art" },
   ];
 
 //   const { setAlert, user, pageLoading = true } = useContext(StateContext)
@@ -36,14 +42,20 @@ const PostBoxForm = (
         {/* <!-- Input --> */}
 
         <div className="form-group col-lg-12 col-md-12">
-          <ImageUploader  image={image}   setImage={setImage}
+          {/* // for single image Uplaoder  */}
+       {fromProduct  ?   <ArrayImageUploader images={images} setAlert={setAlert}  setImages={setImages} loading={loading} setLoading={setLoading}/> :  <ImageUploader  image={image}   setImage={setImage}
           
+
+  
+
+
           name={name}  setName={setName}
           loading={loading}  setLoading={setLoading}
           setAlert={setAlert}
           collectionName={collectionName}
           
           />
+  }
         </div>
 
 
@@ -60,11 +72,11 @@ const PostBoxForm = (
           value={name}
 
           onChange={e => setName(e.target.value)}
-          type="text" name="category name" placeholder="cat_name" />
+          type="text" name="category name" placeholder={fromSubAdd ? "subCategory Name" :fromProduct ? "product Name" : "Category Name"} />
         </div>
 
 {/* -----SubCategory  Select Category---- */}
-{ fromSubAdd &&
+{ showcats   &&
 <div className="form-group col-lg-6 col-md-12">
           <label>Select Category</label>
           <select
@@ -99,11 +111,100 @@ return <option value={cat?.id} key={cat?.id}>{cat?.name}</option>
 
 
 
-        {/* <!-- About Company --> */}
-        {/* <div className="form-group col-lg-12 col-md-12">
-          <label>Job Description</label>
-          <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
-        </div> */}
+
+
+
+
+
+{/* ---   handleSeleSubctCategory */}
+
+
+{ showsubcats    &&
+<div className="form-group col-lg-6 col-md-12">
+          <label>Select subCategory</label>
+          <select
+          
+          onChange={handleSeleSubctCategory}
+          
+          className="chosen-single form-select">
+            <option
+            selected={category}
+            value={category}
+            >Selected</option>
+           {cats?.length > 0  ? 
+           
+           subCats?.map((cat) =>{
+
+return <option value={cat?.id} key={cat?.id}>{cat?.name}</option>
+
+
+           })
+           
+           
+           : <option value="" key="">No Data</option>}
+          </select>
+        </div> 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* <!-- Product Desc--> */}
+
+
+        { fromProduct    &&
+
+        <div className="form-group col-lg-12 col-md-12">
+          <label>Product Description</label>
+          <textarea
+          value={desc}
+          onChange={handleDesc}
+          
+          placeholder="Product Description"></textarea>
+        </div>
+}
+
+
+{ fromProduct    &&
+
+<div className="form-group col-lg-6 col-md-12">
+          <label>Specialisms </label>
+          <Select
+           menuPlacement="bottom"
+           
+           components={animatedComponents}
+            defaultValue={[specialisms[2]]}
+            isMulti
+            name="colors"
+            options={specialisms}
+            className="basic-multi-select"
+            classNamePrefix="select"
+
+            onChange={(value) => {
+             
+              setColors(value)
+              console.log('color ' + value)
+           
+            }}
+
+
+
+          />
+        </div>
+
+}
+
+
+
+
 
     
 
